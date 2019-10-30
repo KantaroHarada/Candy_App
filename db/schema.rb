@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191030050517) do
+ActiveRecord::Schema.define(version: 20191030075211) do
+
+  create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "c_name"
+    t.integer "c_number"
+    t.integer "c_exp"
+    t.integer "c_sec"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cards_on_user_id"
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -22,4 +33,5 @@ ActiveRecord::Schema.define(version: 20191030050517) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cards", "users"
 end
