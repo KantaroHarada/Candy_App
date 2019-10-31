@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191030075211) do
+ActiveRecord::Schema.define(version: 20191031021528) do
 
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "c_name"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20191030075211) do
     t.string "passconf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.index ["mailadress"], name: "index_users_on_mailadress", unique: true
   end
 
   add_foreign_key "cards", "users"
