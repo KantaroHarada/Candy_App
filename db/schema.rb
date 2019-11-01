@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191031081535) do
+ActiveRecord::Schema.define(version: 20191101053940) do
 
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "c_name"
@@ -23,6 +23,46 @@ ActiveRecord::Schema.define(version: 20191031081535) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
+  create_table "costs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "p_cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "p_genre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "manufacturers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "p_manufacture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "p_name"
+    t.string "p_photo"
+    t.string "p_detail"
+    t.bigint "stock_id"
+    t.bigint "genre_id"
+    t.bigint "manufacturer_id"
+    t.bigint "cost_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cost_id"], name: "index_products_on_cost_id"
+    t.index ["genre_id"], name: "index_products_on_genre_id"
+    t.index ["manufacturer_id"], name: "index_products_on_manufacturer_id"
+    t.index ["stock_id"], name: "index_products_on_stock_id"
+  end
+
+  create_table "stocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "p_stock"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "email"
@@ -32,7 +72,12 @@ ActiveRecord::Schema.define(version: 20191031081535) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "remember_digest"
   end
 
   add_foreign_key "cards", "users"
+  add_foreign_key "products", "costs"
+  add_foreign_key "products", "genres"
+  add_foreign_key "products", "manufacturers"
+  add_foreign_key "products", "stocks"
 end

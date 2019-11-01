@@ -17,3 +17,10 @@
                pass:              password,
                passconf: password)
 end
+
+100.times do |m|
+  name = Faker::Dessert.variety
+  detail = Faker::Food.description
+  Product.create!(p_name: name
+                  p_photo: pics.png
+                  p_detail: detail)
