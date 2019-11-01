@@ -1,0 +1,11 @@
+<% provide(:title, 'All products') %>
+<h1>OKASHI list</h1>
+
+<ul class="products">
+  <% @products.each do |product| %>
+    <li>
+      <%= image_tag "pics.png", alt: "Product pic", id: "assets", class: "image", size: 50 %>
+      <%= link_to product.name, product %>
+    </li>
+  <% end %>
+</ul>
