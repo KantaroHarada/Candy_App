@@ -4,6 +4,5 @@ FactoryBot.define do
     c_number 1
     c_exp 1
     c_sec 1
-    user nil
   end
 end
