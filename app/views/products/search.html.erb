@@ -1,19 +1,44 @@
 <h1>OKASHI SAGASAHI</h1>
+
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
    <%= form_tag(product_search_path,:method => 'get') do %>
     <%= text_field_tag :search %>
+  <select name="genre">
+    <option value=""></option>
+    <option value="1">candy</option>
+    <option value="2">cookie</option>
+    <option value="3">chocolate</option>
+    <option value="4">gum</option>
+    <option value="5">gumi</option>
+  </select>
+
     <%= submit_tag 'SAGASU', :name => nil %>
    <% end %>
+  
+<%= will_paginate %>
+<div  class="col-md-10">
+   <% @products.each do |product| %>
+    　<%= image_tag "pics.png", alt: "Product pic", id: "assets", class: "image",size:400 %>
+       <%= link_to product.p_name, product %>
+       
+     <% if !current_user.admin? %>
+     <%= form_for @basket, url: '/basket' do |f| %>
+       <%= hidden_field_tag :product_id, product.id %>
+       <%= f.label :amount %>
+       <%= f.number_field :p_number %>
+       <%= f.submit "basket" %>
+     <% end %>
+     <% else %>
+       <%= link_to "編集", edit_product_path(product) %>
+       <%= link_to "削除", product, method: :delete,data: { confirm: "You sure?" }  %>
+       <% end %>
+   <% end %>
+</div>
 
-    <ul><% @products.each do |product| %>
-     <li>
-      <%= link_to product.name, product %>
-    </li>
-    <%= link_to "PURCHASE",'#' %>
-    <%= link_to "DETAIL",'#' %>
-    <% end %>
-    </ul>
+<%= will_paginate %>
 
   </div>
 </div>
+
+

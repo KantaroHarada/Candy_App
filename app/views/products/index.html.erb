@@ -1,11 +1,26 @@
 <% provide(:title, 'All products') %>
 <h1>OKASHI list</h1>
 
+<%= will_paginate %>
+
 <ul class="products">
   <% @products.each do |product| %>
+    <div class="col-md-6">
     <li>
       <%= image_tag "pics.png", alt: "Product pic", id: "assets", class: "image", size: 50 %>
-      <%= link_to product.name, product %>
     </li>
+    </div>
+
+    <div class="col-md-10">
+    <li>
+    <%= link_to product.p_name, product %>
+    </li>
+    <li>
+    <%= link_to "purchase","#" %>
+    </li>
+    </div>
+    
   <% end %>
 </ul>
+
+<%= will_paginate %>

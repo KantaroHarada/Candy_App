@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191101053940) do
+ActiveRecord::Schema.define(version: 20191106071025) do
+
+  create_table "baskets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "p_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_baskets_on_product_id"
+    t.index ["user_id"], name: "index_baskets_on_user_id"
+  end
 
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "c_name"
@@ -73,8 +83,11 @@ ActiveRecord::Schema.define(version: 20191101053940) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "remember_digest"
+    t.boolean "admin", default: false
   end
 
+  add_foreign_key "baskets", "products"
+  add_foreign_key "baskets", "users"
   add_foreign_key "cards", "users"
   add_foreign_key "products", "costs"
   add_foreign_key "products", "genres"

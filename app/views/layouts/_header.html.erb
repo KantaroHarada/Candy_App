@@ -11,11 +11,13 @@
             <ul class="dropdown-menu">
               <li><%= link_to "OKASHI list", products_path %></li>
               <li><%= link_to "OKASHI search", product_search_path %></li>
-              <li><%= link_to "OKASHI genre", '#' %></li>
               <li><%= link_to "basket list", '#' %></li>
               <li><%= link_to "basket history", '#' %></li>
               <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <% if current_user.admin? %>
+              <li><%= link_to "admin", product_search_path %></li>
+              <% end %>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: :delete %>

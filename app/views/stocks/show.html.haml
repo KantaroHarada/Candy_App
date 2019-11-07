@@ -1,0 +1,3 @@
+= form_for @stock do |s|
+= f.label :quantity, "数量"
+= f.select :quantity, stock_array_maker(@stock)  #Controllerで生成した配列を使うようにする

@@ -1,0 +1,39 @@
+<% provide(:title, @product.p_name) %>
+<div class="row">
+  <div class="col-md-6">
+    <section class="product_info">
+      <h1>
+      <%= image_tag "pics.png", alt: "Product pic", id: "assets", class: "image",size:300 %>
+      </h1>
+    </section>
+  </div>
+  <aside class="col-md-6">
+     <section class="product_detail">
+     <h1>name</h1>
+     <h2>
+     <%= @product.p_name %>
+     </h2>
+      <h1>detail</h1>
+      <h2>
+      <%= @product.p_detail %>
+      </h2>
+      
+
+      <h1>genre</h1>
+      <h2>
+      <%= @product.genre.p_genre %>
+      </h2>
+
+      <h1>cost</h1>
+      <h2>
+      <%= @product.cost.p_cost %>
+      </h2>
+
+      <h1>manufacturer</h1>
+      <h2>
+      <%= @product.manufacturer.p_manufacture %>
+      </h2>
+      
+      </section>
+  </aside>
+</div>
